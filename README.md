@@ -5,7 +5,7 @@
 
 PagedArray is a generic Swift data structure for helping you implement paging mechanisms in (but not limited to) UITableViews, UICollectionViews and UIPageViewControllers.
 
-It is a Swift-version of its Objective-C equivalent [`AWPagedArray`](https://github.com/MrAlek/AWPagedArray), which was used for implementing the techniques described in the blog post [Fluent Pagination – no more jumpy scrolling](http://www.iosnomad.com/blog/2014/4/21/fluent-pagination)
+It is a Swift-version of its Objective-C equivalent [`AWPagedArray`](https://github.com/MrAlek/AWPagedArray), which was used for implementing the techniques described in the blog post [Fluent Pagination – no more jumpy scrolling](http://www.iosnomad.com/blog/2014/4/21/fluent-pagination).
 
 PagedArray represents a fixed-sized list of optional elements stored by pages. It implements all the familiar Swift collection protocols so your datasource can use it just like a regular Array while providing an easy-to-use API for setting pages of data as they are retrieved.
 
