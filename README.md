@@ -39,7 +39,7 @@ Array(pagedArray) // ["A", "B", ... nil, nil]
 
 ## Requirements
 
-PagedArray is currently built for Swift 1.2 using Xcode 6.3 Beta 2.
+PagedArray is currently built for Swift 1.2 using Xcode 6.3.
 
 ## Installation
 
