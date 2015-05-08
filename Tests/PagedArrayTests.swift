@@ -104,4 +104,38 @@ class PagedArrayTests: XCTestCase {
         XCTAssertEqual(pagedArray.loadedElements.count, 0, "RemoveAllPages should remove all loaded elements")
     }
     
+    func testGetLastPageNumber() {
+        XCTAssertEqual(pagedArray.lastPage, 7)
+    }
+    
+    func testGetLastPageNumberExactCountPageSizeDivision() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 30, pageSize: 10)
+        XCTAssertEqual(tinyArray.lastPage, 2)
+    }
+    
+    func testGetLastPageNumberExactCountPageSizeDivisionWithStartingPage1() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 30, pageSize: 10, startPage: 1)
+        XCTAssertEqual(tinyArray.lastPage, 2)
+    }
+    
+    func testGetLastPageNumberExactCountPageSizeDivisionWithStartingPage10() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 30, pageSize: 10, startPage: 10)
+        XCTAssertEqual(tinyArray.lastPage, 2)
+    }
+    
+    func testGetLastPageNumberNotExactCountPageSizeDivision() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 100, pageSize: 15)
+        XCTAssertEqual(tinyArray.lastPage, 7)
+    }
+    
+    func testGetLastPageNumberNotExactCountPageSizeDivisionStartingPage1() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 100, pageSize: 15, startPage: 1)
+        XCTAssertEqual(tinyArray.lastPage, 7)
+    }
+    
+    func testGetLastPageNumberNotExactCountPageSizeDivisionStartingPage5() {
+        var tinyArray: PagedArray<Int> = PagedArray(count: 100, pageSize: 15, startPage: 5)
+        XCTAssertEqual(tinyArray.lastPage, 7)
+    }
+    
 }
