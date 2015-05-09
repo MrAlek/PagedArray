@@ -27,9 +27,11 @@ import PagedArray
 
 class PagedArrayTests: XCTestCase {
     
+    // These three parameters should be modifiable without any
+    // test failing as long as the resulting array has at least three pages.
     let ArrayCount = 100
     let PageSize = 15
-    let StartPage = 1
+    let StartPage = 10
     
     var pagedArray: PagedArray<Int>!
     
@@ -47,6 +49,15 @@ class PagedArrayTests: XCTestCase {
         
         pagedArray.setElements(firstPage, page: StartPage)
         pagedArray.setElements(secondPage, page: StartPage+1)
+    }
+    
+    // MARK: Utility
+    func calculatedLastPage() -> Int {
+        if ArrayCount%PageSize == 0 {
+            return ArrayCount/PageSize+StartPage-1
+        } else {
+            return ArrayCount/PageSize+StartPage
+        }
     }
     
     // MARK: Tests
@@ -86,11 +97,11 @@ class PagedArrayTests: XCTestCase {
     }
     
     func testIndexRangeWorksForLastPage() {
-        XCTAssertEqual(pagedArray.indexesForPage(pagedArray.lastPage), (PageSize*(ArrayCount/PageSize)..<ArrayCount), "Incorrect range for page")
+        XCTAssertEqual(pagedArray.indexesForPage(pagedArray.lastPage), (PageSize*(calculatedLastPage()-StartPage)..<ArrayCount), "Incorrect range for page")
     }
     
     func testRemovePageRemovesPage() {
-        let page = 2
+        let page = StartPage+2
         pagedArray.removePage(page)
         for index in pagedArray.indexesForPage(page) {
             if pagedArray[index] != nil {
@@ -102,6 +113,10 @@ class PagedArrayTests: XCTestCase {
     func testRemoveAllPagesRemovesAllLoadedElements() {
         pagedArray.removeAllPages()
         XCTAssertEqual(pagedArray.loadedElements.count, 0, "RemoveAllPages should remove all loaded elements")
+    }
+    
+    func testLastPageImplementation() {
+        XCTAssertEqual(pagedArray.lastPage, calculatedLastPage(), "Incorrect index for last page")
     }
     
 }
