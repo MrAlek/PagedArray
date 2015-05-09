@@ -46,7 +46,11 @@ public struct PagedArray<T> {
     
     /// The last valid page index
     public var lastPage: Int {
-        return count/pageSize+startPage
+        var result = (count/pageSize) + startPage
+        if (count % pageSize) == 0 {
+            result--
+        }
+        return result
     }
     
     /// All elements currently set, in order
