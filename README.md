@@ -7,7 +7,7 @@ PagedArray is a generic Swift data structure for helping you implement paging me
 
 It is a Swift-version of its Objective-C equivalent [`AWPagedArray`](https://github.com/MrAlek/AWPagedArray), which was used for implementing the techniques described in the blog post [Fluent Pagination – no more jumpy scrolling](http://www.iosnomad.com/blog/2014/4/21/fluent-pagination).
 
-PagedArray represents a fixed-sized list of optional elements stored by pages. It implements all the familiar Swift collection protocols so your datasource can use it just like a regular Array while providing an easy-to-use API for setting pages of data as they are retrieved.
+PagedArray represents a list of optional elements stored by pages. It implements all the familiar Swift collection protocols so your datasource can use it just like a regular Array while providing an easy-to-use API for setting pages of data as they are retrieved.
 
 ```swift
 
@@ -15,7 +15,7 @@ PagedArray represents a fixed-sized list of optional elements stored by pages. I
 var pagedArray = PagedArray<String>(count: 200, pageSize: 20)
 
 // Set data pages
-pagedArray.setElements(["A" ... "T"], page: 1)
+pagedArray.setElements(["A" ... "T"], pageIndex: 1)
 
 // Retrieve data like a normal array containing optional elements
 pagedArray.count // 200
