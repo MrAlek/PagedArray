@@ -31,7 +31,7 @@ class PagedArrayTests: XCTestCase {
     // test failing as long as the resulting array has at least three pages.
     let ArrayCount = 100
     let PageSize = 15
-    let StartPage = 10
+    let StartPageIndex = 10
     
     var pagedArray: PagedArray<Int>!
     
@@ -41,24 +41,18 @@ class PagedArrayTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        pagedArray = PagedArray(count: ArrayCount, pageSize: PageSize, startPage: StartPage)
+        pagedArray = PagedArray(count: ArrayCount/2, pageSize: PageSize, startPageIndex: StartPageIndex)
 
         // Fill up two pages
         firstPage = Array(1...PageSize)
         secondPage = Array(PageSize+1...PageSize*2)
         
-        pagedArray.setElements(firstPage, page: StartPage)
-        pagedArray.setElements(secondPage, page: StartPage+1)
+        pagedArray.setElements(firstPage, pageIndex: StartPageIndex)
+        pagedArray.setElements(secondPage, pageIndex: StartPageIndex+1)
+        
+        pagedArray.count = ArrayCount
     }
-    
-    // MARK: Utility
-    func calculatedLastPage() -> Int {
-        if ArrayCount%PageSize == 0 {
-            return ArrayCount/PageSize+StartPage-1
-        } else {
-            return ArrayCount/PageSize+StartPage
-        }
-    }
+
     
     // MARK: Tests
     func testSizeIsCorrect() {
@@ -71,6 +65,40 @@ class PagedArrayTests: XCTestCase {
 
         XCTAssertEqual(generatedArray.count, ArrayCount, "Generated array has wrong count")
         XCTAssertEqual(generatedArray[0]!, firstPage[0], "Generated array has wrong content")
+    }
+    
+    func testSubscriptingWorksForAllValidIndexesWithoutHittingAssertions() {
+        for var i = pagedArray.startIndex; i < pagedArray.endIndex; i++ {
+            pagedArray[i]
+        }
+    }
+    
+    func testSubscriptingOutOfRangeHitsAssertion() {
+        // Currently impossible to test in Swift 1.2
+    }
+    
+    func testCanSetLastPageWithUnevenSize() {
+        
+        let elements = Array(1...pagedArray.sizeForPage(pagedArray.lastPageIndex))
+        
+        pagedArray.setElements(elements, pageIndex: pagedArray.lastPageIndex)
+    }
+    
+    func testChangingCountChangesLastPageIndexesRange() {
+        
+        let originalIndexes = pagedArray.indexes(pagedArray.lastPageIndex)
+        pagedArray.count++
+        let newIndexes = pagedArray.indexes(pagedArray.lastPageIndex)
+        
+        XCTAssertNotEqual(originalIndexes, newIndexes, "Indexes for last page did not change even though total count changed")
+    }
+    
+    func testChangingCountChangesLastPageIndex() {
+        
+        let originalLastPageIndex = pagedArray.lastPageIndex
+        pagedArray.count += PageSize
+        
+        XCTAssertEqual(pagedArray.lastPageIndex, originalLastPageIndex+1, "Number of pages did not change after total count was increased with one page size")
     }
     
     func testReturnsNilForIndexCorrespondingToPageNotYetSet() {
@@ -89,21 +117,21 @@ class PagedArrayTests: XCTestCase {
     }
     
     func testIndexRangeWorksForFirstPage() {
-        XCTAssertEqual(pagedArray.indexesForPage(StartPage), (0..<PageSize), "Incorrect range for page")
+        XCTAssertEqual(pagedArray.indexes(StartPageIndex), (0..<PageSize), "Incorrect range for page")
     }
     
     func testIndexRangeWorksForSecondPage() {
-        XCTAssertEqual(pagedArray.indexesForPage(StartPage+1), (PageSize..<PageSize*2), "Incorrect range for page")
+        XCTAssertEqual(pagedArray.indexes(StartPageIndex+1), (PageSize..<PageSize*2), "Incorrect range for page")
     }
     
     func testIndexRangeWorksForLastPage() {
-        XCTAssertEqual(pagedArray.indexesForPage(pagedArray.lastPage), (PageSize*(calculatedLastPage()-StartPage)..<ArrayCount), "Incorrect range for page")
+        XCTAssertEqual(pagedArray.indexes(pagedArray.lastPageIndex), (PageSize*(calculatedLastPageIndex()-StartPageIndex)..<ArrayCount), "Incorrect range for page")
     }
     
     func testRemovePageRemovesPage() {
-        let page = StartPage+2
+        let page = StartPageIndex+2
         pagedArray.removePage(page)
-        for index in pagedArray.indexesForPage(page) {
+        for index in pagedArray.indexes(page) {
             if pagedArray[index] != nil {
                 XCTAssert(false, "Paged array should return nil for index belonging to a removed page")
             }
@@ -115,8 +143,65 @@ class PagedArrayTests: XCTestCase {
         XCTAssertEqual(pagedArray.loadedElements.count, 0, "RemoveAllPages should remove all loaded elements")
     }
     
-    func testLastPageImplementation() {
-        XCTAssertEqual(pagedArray.lastPage, calculatedLastPage(), "Incorrect index for last page")
+    func testLastPageIndexImplementation() {
+        XCTAssertEqual(pagedArray.lastPageIndex, calculatedLastPageIndex(), "Incorrect index for last page")
+    }
+    
+    
+    // MARK: High Chaparall Mode tests
+    
+    func testAddingExtraElementInLastPageUpdatesCountInHighChaparallMode() {
+        
+        pagedArray.updatesCountWhenSettingPages = true // YEE-HAW
+        
+        let lastPageSize = pagedArray.sizeForPage(pagedArray.lastPageIndex)+1 // Simulate finding an extra element from the API
+        let lastPage = Array(1...lastPageSize)
+        
+        pagedArray.setElements(lastPage, pageIndex: pagedArray.lastPageIndex)
+        
+        XCTAssertEqual(pagedArray.count, ArrayCount+1, "Count did not increase when setting a bigger page than expected")
+    }
+    
+    func testCountIsChangedByAddingExtraPageInHighChaparallMode() {
+        
+        pagedArray.updatesCountWhenSettingPages = true // YEE-HAW
+        
+        let extraPage = Array(1...PageSize)
+        
+        pagedArray.setElements(extraPage, pageIndex: pagedArray.lastPageIndex+2)
+        
+        var expectedSize = ArrayCount+PageSize*2
+        if ArrayCount%PageSize > 0 {
+            expectedSize += PageSize-ArrayCount%PageSize
+        }
+        
+        
+        XCTAssertEqual(pagedArray.count, expectedSize, "Count did not update when adding extra pages")
+    }
+    
+    func testSettingPageWithLowerSizeUpdatesCountInHighChaparallMode() {
+        
+        pagedArray.updatesCountWhenSettingPages = true // YEE-HAW
+        
+        pagedArray.setElements([0], pageIndex: StartPageIndex)
+        XCTAssertEqual(pagedArray.count, ArrayCount-PageSize+1, "Count did not update when setting a page with lower length than expected")
+    }
+    
+    // MARK: Utility
+    private func calculatedLastPageIndex() -> Int {
+        if ArrayCount%PageSize == 0 {
+            return ArrayCount/PageSize+StartPageIndex-1
+        } else {
+            return ArrayCount/PageSize+StartPageIndex
+        }
     }
     
 }
+
+private extension PagedArray {
+    func sizeForPage(pageIndex: Int) -> Int {
+        let indexes = self.indexes(pageIndex)
+        return indexes.endIndex-indexes.startIndex
+    }
+}
+

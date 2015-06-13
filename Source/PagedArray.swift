@@ -24,8 +24,7 @@
 
 ///
 /// A paging collection type for arbitrary elements. Great for implementing paging
-/// mechanisms when providing data read from slow I/O to scrolling UI elements
-/// such as `UICollectionView` and `UITableView`.
+/// mechanisms to scrolling UI elements such as `UICollectionView` and `UITableView`.
 ///
 public struct PagedArray<T> {
     private typealias Element = T
@@ -39,17 +38,25 @@ public struct PagedArray<T> {
     public let pageSize: Int
     
     /// The total count of supposed elements, including nil values
-    public let count: Int
+    public var count: Int
     
     /// The starting page index
-    public let startPage: Int
+    public let startPageIndex: Int
+    
+    /// When set to true, no size or upper index checking
+    /// is done when setting pages, making the paged array
+    /// adjust its size dynamically.
+    ///
+    /// Useful for infinite lists and when data count cannot
+    /// be guaranteed not to change while loading new pages.
+    public var updatesCountWhenSettingPages: Bool = false
     
     /// The last valid page index
-    public var lastPage: Int {
+    public var lastPageIndex: Int {
         if count%pageSize == 0 {
-            return count/pageSize+startPage-1
+            return count/pageSize+startPageIndex-1
         } else {
-            return count/pageSize+startPage
+            return count/pageSize+startPageIndex
         }
     }
     
@@ -61,34 +68,27 @@ public struct PagedArray<T> {
     // MARK: Initializers
     
     /// Creates an empty `PagedArray`
-    public init(count: Int, pageSize: Int, startPage: Int) {
+    public init(count: Int, pageSize: Int, startPageIndex: Int = 0) {
         self.count = count
         self.pageSize = pageSize
-        self.startPage = startPage
-    }
-    
-    /// Creates an empty `PagedArray` with a default 0 `startPage` index
-    public init(count: Int, pageSize: Int) {
-        self.count = count
-        self.pageSize = pageSize
-        self.startPage = 0
+        self.startPageIndex = startPageIndex
     }
     
     // MARK: Public functions
     
     /// Returns the page index for an element index
     public func pageNumberForIndex(index: Index) -> Int {
-        assert(index >= startIndex || index <= endIndex, "Index out of bounds")
-        return index/pageSize+startPage
+        assert(index >= startIndex && index < endIndex, "Index out of bounds")
+        return index/pageSize+startPageIndex
     }
     
     /// Returns a `Range` corresponding to the indexes for a page
-    public func indexesForPage(page: Int) -> Range<Index> {
-        assert(page >= startPage && page <= lastPage, "Page index out of bounds")
+    public func indexes(pageIndex: Int) -> Range<Index> {
+        assert(pageIndex >= startPageIndex && pageIndex <= lastPageIndex, "Page index out of bounds")
         
-        let startIndex: Index = (page-startPage)*pageSize
+        let startIndex: Index = (pageIndex-startPageIndex)*pageSize
         let endIndex: Index
-        if page == lastPage {
+        if pageIndex == lastPageIndex {
             endIndex = count
         } else {
             endIndex = startIndex+pageSize
@@ -100,13 +100,25 @@ public struct PagedArray<T> {
     // MARK: Public mutating functions
     
     /// Sets a page of elements for a page index
-    public mutating func setElements(elements: [Element], page: Int) {
-        assert(page >= startPage && page <= lastPage, "Page index out of bounds")
-        if page != lastPage {
-            assert(elements.count == pageSize, "Invalid elements count for page")
+    public mutating func setElements(elements: [Element], pageIndex: Int) {
+        assert(pageIndex >= startPageIndex, "Page index out of bounds")
+        assert(elements.count > 0, "Empty elements array is not allowed")
+        
+        let pageIndexForExpectedSize = (pageIndex > lastPageIndex) ? lastPageIndex : pageIndex
+        let expectedSize = sizeForPage(pageIndexForExpectedSize)
+        
+        if !updatesCountWhenSettingPages {
+            assert(pageIndex <= lastPageIndex, "Page index out of bounds")
+            assert(elements.count == expectedSize, "Incorrect page size")
+        } else {
+            // High Chaparall mode, array can change in size
+            count += elements.count-expectedSize
+            if pageIndex > lastPageIndex {
+                count += (pageIndex-lastPageIndex)*pageSize
+            }
         }
         
-        pages[page] = elements
+        pages[pageIndex] = elements
     }
     
     /// Removes the elements corresponding to the page, replacing them with `nil` values
@@ -182,6 +194,15 @@ extension PagedArray : Printable {
 extension PagedArray : DebugPrintable {
     public var debugDescription: String {
         return "PagedArray(Pages: \(pages), Array representation: \(Array(self)))"
+    }
+}
+
+// MARK: Private functions
+
+private extension PagedArray {
+    func sizeForPage(pageIndex: Int) -> Int {
+        let indexes = self.indexes(pageIndex)
+        return indexes.endIndex-indexes.startIndex
     }
 }
 
