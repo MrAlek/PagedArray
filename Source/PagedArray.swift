@@ -53,7 +53,9 @@ public struct PagedArray<T> {
     
     /// The last valid page index
     public var lastPageIndex: Int {
-        if count%pageSize == 0 {
+        if count == 0 {
+            return 0
+        } else if count%pageSize == 0 {
             return count/pageSize+startPageIndex-1
         } else {
             return count/pageSize+startPageIndex
@@ -102,7 +104,7 @@ public struct PagedArray<T> {
     /// Sets a page of elements for a page index
     public mutating func setElements(elements: [Element], pageIndex: Int) {
         assert(pageIndex >= startPageIndex, "Page index out of bounds")
-        assert(elements.count > 0, "Empty elements array is not allowed")
+        assert(count == 0 || elements.count > 0, "Can't set empty elements page on non-empty array")
         
         let pageIndexForExpectedSize = (pageIndex > lastPageIndex) ? lastPageIndex : pageIndex
         let expectedSize = sizeForPage(pageIndexForExpectedSize)

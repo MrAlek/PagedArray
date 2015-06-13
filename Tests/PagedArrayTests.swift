@@ -30,7 +30,7 @@ class PagedArrayTests: XCTestCase {
     // These three parameters should be modifiable without any
     // test failing as long as the resulting array has at least three pages.
     let ArrayCount = 100
-    let PageSize = 15
+    let PageSize = 10
     let StartPageIndex = 10
     
     var pagedArray: PagedArray<Int>!
@@ -145,6 +145,11 @@ class PagedArrayTests: XCTestCase {
     
     func testLastPageIndexImplementation() {
         XCTAssertEqual(pagedArray.lastPageIndex, calculatedLastPageIndex(), "Incorrect index for last page")
+    }
+    
+    func testSettingEmptyElementsOnZeroCountArray() {
+        var emptyArray: PagedArray<Int> = PagedArray(count: 0, pageSize: 10)
+        emptyArray.setElements(Array(), pageIndex: 0)
     }
     
     
