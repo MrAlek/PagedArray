@@ -49,19 +49,13 @@ To use PagedArray with a project targeting iOS 7, you must include the `PagedArr
 
 ### Cocoapods
 
-CocoaPods 0.36 beta adds supports for Swift and embedded frameworks. You can install it with the following command:
-
-```bash
-$ gem install cocoapods --pre
-```
-
 To integrate PagedArray into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
-pod 'PagedArray', '~> 0.1'
+pod 'PagedArray', '~> 0.2'
 ```
 
 Then, run the following command:
@@ -84,7 +78,7 @@ $ brew install carthage
 To integrate PagedArray into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "MrAlek/PagedArray" >= 0.1
+github "MrAlek/PagedArray" >= 0.2
 ```
 
 ## Demo
