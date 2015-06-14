@@ -57,11 +57,7 @@ class ViewController: UITableViewController {
     // MARK: Private functions
     
     private func configureCell(cell: UITableViewCell, data: String?) {
-        if let data = data {
-            cell.textLabel?.text = data
-        } else {
-            cell.textLabel?.text = " "
-        }
+        cell.textLabel!.text = data ?? ""
     }
     
     private func loadDataIfNeededForRow(row: Int) {
@@ -85,13 +81,13 @@ class ViewController: UITableViewController {
     }
     
     private func loadDataForPage(page: Int) {
-        let indexes = pagedArray.indexesForPage(page)
+        let indexes = pagedArray.indexes(page)
 
         // Create loading operation
         let operation = DataLoadingOperation(indexesToLoad: indexes) { [unowned self] indexes, data in
             
             // Set elements on paged array
-            self.pagedArray.setElements(data, page: page)
+            self.pagedArray.setElements(data, pageIndex: page)
             
             // Loop through and update visible rows that got new data
             for row in self.visibleRowsForIndexes(indexes) {
@@ -107,9 +103,9 @@ class ViewController: UITableViewController {
     }
     
     private func visibleRowsForIndexes(indexes: Range<Int>) -> [Int] {
-        let visiblePaths = self.tableView.indexPathsForVisibleRows() as! [NSIndexPath]
+        let visiblePaths = self.tableView.indexPathsForVisibleRows! as [NSIndexPath]
         let visibleRows = visiblePaths.map { $0.row }
-        return visibleRows.filter { find(indexes, $0) != nil }
+        return visibleRows.filter { indexes.indexOf($0) != nil }
     }
     
 }
@@ -128,7 +124,7 @@ extension ViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         loadDataIfNeededForRow(indexPath.row)
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         configureCell(cell, data: pagedArray[indexPath.row])
         return cell
     }
@@ -142,7 +138,7 @@ class DataLoadingOperation: NSBlockOperation {
     init(indexesToLoad: Range<Int>, completion: (indexes: Range<Int>, data: [String]) -> Void) {
         super.init()
         
-        println("Loading indexes: \(indexesToLoad)")
+        print("Loading indexes: \(indexesToLoad)")
         
         addExecutionBlock {
             // Simulate loading
