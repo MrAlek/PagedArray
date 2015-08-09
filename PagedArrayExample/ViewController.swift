@@ -85,13 +85,13 @@ class ViewController: UITableViewController {
     }
     
     private func loadDataForPage(page: Int) {
-        let indexes = pagedArray.indexesForPage(page)
+        let indexes = pagedArray.indexes(page)
 
         // Create loading operation
         let operation = DataLoadingOperation(indexesToLoad: indexes) { [unowned self] indexes, data in
             
             // Set elements on paged array
-            self.pagedArray.setElements(data, page: page)
+            self.pagedArray.setElements(data, pageIndex: page)
             
             // Loop through and update visible rows that got new data
             for row in self.visibleRowsForIndexes(indexes) {
