@@ -27,7 +27,7 @@
 /// mechanisms to scrolling UI elements such as `UICollectionView` and `UITableView`.
 ///
 public struct PagedArray<T> {
-    private typealias Element = T
+    public typealias Element = T
     
     /// The datastorage
     public private(set) var pages = [Int: [Element]]()
@@ -150,8 +150,8 @@ extension PagedArray {
     }
     
     // Returns a single value by iteratively combining each element
-    public func reduce<U>(var initial: U, combine: (U, T?) -> U) -> U {
-        return Swift.reduce(self, initial, combine)
+    public func reduce<U>(initial: U, combine: (U, T?) -> U) -> U {
+        return self.reduce(initial, combine: combine)
     }
 }
 
@@ -183,17 +183,17 @@ extension PagedArray : CollectionType {
     }
 }
 
-// MARK: Printable
+// MARK: CustomStringConvertible
 
-extension PagedArray : Printable {
+extension PagedArray : CustomStringConvertible {
     public var description: String {
         return "PagedArray(\(Array(self)))"
     }
 }
 
-// MARK: DebugPrintable
+// MARK: CustomDebugStringConvertible
 
-extension PagedArray : DebugPrintable {
+extension PagedArray : CustomDebugStringConvertible {
     public var debugDescription: String {
         return "PagedArray(Pages: \(pages), Array representation: \(Array(self)))"
     }
