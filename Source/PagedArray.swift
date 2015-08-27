@@ -27,7 +27,7 @@
 /// mechanisms to scrolling UI elements such as `UICollectionView` and `UITableView`.
 ///
 public struct PagedArray<T> {
-    private typealias Element = T
+    public typealias Element = T
     
     /// The datastorage
     public private(set) var pages = [Int: [Element]]()
