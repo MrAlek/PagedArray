@@ -89,11 +89,12 @@ class ViewController: UITableViewController {
             // Set elements on paged array
             self.pagedArray.setElements(data, pageIndex: page)
             
-            // Loop through and update visible rows that got new data
-            for row in self.visibleRowsForIndexes(indexes) {
-                self.configureCell(self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0))!, data: self.pagedArray[row])
+            // Reload cells
+            if let indexPathsToReload = self.visibleIndexPathsForIndexes(indexes) {
+                self.tableView.reloadRowsAtIndexPaths(indexPathsToReload, withRowAnimation: .Automatic)
             }
             
+            // Cleanup
             self.dataLoadingOperations[page] = nil
         }
 
@@ -102,10 +103,8 @@ class ViewController: UITableViewController {
         dataLoadingOperations[page] = operation
     }
     
-    private func visibleRowsForIndexes(indexes: Range<Int>) -> [Int] {
-        let visiblePaths = self.tableView.indexPathsForVisibleRows! as [NSIndexPath]
-        let visibleRows = visiblePaths.map { $0.row }
-        return visibleRows.filter { indexes.indexOf($0) != nil }
+    private func visibleIndexPathsForIndexes(indexes: Range<Int>) -> [NSIndexPath]? {
+        return tableView.indexPathsForVisibleRows?.filter { indexes.contains($0.row) }
     }
     
 }
