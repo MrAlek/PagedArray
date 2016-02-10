@@ -37,14 +37,21 @@ class ViewController: UITableViewController {
     let cellIdentifier = "Cell"
     let operationQueue = NSOperationQueue()
     
-    var pagedArray = PagedArray<String>(count: TotalCount, pageSize: PageSize)
-    var dataLoadingOperations = [Int: NSOperation]()
+    var pagedArray = PagedArray<String>(count: TotalCount, pageSize: PageSize, preloadMargin: PreloadMargin)
     var shouldPreload = true
+    
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        pagedArray.delegate = self
+    }
     
     // MARK: User actions
     
     @IBAction func clearDataPressed() {
-        dataLoadingOperations.removeAll(keepCapacity: true)
         operationQueue.cancelAllOperations()
         pagedArray.removeAllPages()
         tableView.reloadData()
@@ -60,29 +67,18 @@ class ViewController: UITableViewController {
         cell.textLabel!.text = data ?? ""
     }
     
-    private func loadDataIfNeededForRow(row: Int) {
-        
-        let currentPage = pagedArray.pageNumberForIndex(row)
-        if needsLoadDataForPage(currentPage) {
-            loadDataForPage(currentPage)
-        }
-        
-        let preloadIndex = row+PreloadMargin
-        if preloadIndex < pagedArray.endIndex && shouldPreload {
-            let preloadPage = pagedArray.pageNumberForIndex(preloadIndex)
-            if preloadPage > currentPage && needsLoadDataForPage(preloadPage) {
-                loadDataForPage(preloadPage)
-            }
-        }
+    private func visibleIndexPathsForIndexes(indexes: Range<Int>) -> [NSIndexPath]? {
+        return tableView.indexPathsForVisibleRows?.filter { indexes.contains($0.row) }
     }
-    
-    private func needsLoadDataForPage(page: Int) -> Bool {
-        return pagedArray.pages[page] == nil && dataLoadingOperations[page] == nil
-    }
-    
-    private func loadDataForPage(page: Int) {
-        let indexes = pagedArray.indexes(page)
+}
 
+// MARK: PagedArrayDelegate
+
+extension ViewController: PagedArrayDelegate {
+    
+    func fetchPagedData(page: Int, completion: (() -> Void)) {
+        let indexes = pagedArray.indexes(page)
+        
         // Create loading operation
         let operation = DataLoadingOperation(indexesToLoad: indexes) { [unowned self] indexes, data in
             
@@ -95,18 +91,12 @@ class ViewController: UITableViewController {
             }
             
             // Cleanup
-            self.dataLoadingOperations[page] = nil
+            completion()
         }
-
+        
         // Add operation to queue and save it
         operationQueue.addOperation(operation)
-        dataLoadingOperations[page] = operation
     }
-    
-    private func visibleIndexPathsForIndexes(indexes: Range<Int>) -> [NSIndexPath]? {
-        return tableView.indexPathsForVisibleRows?.filter { indexes.contains($0.row) }
-    }
-    
 }
 
 // MARK: Table view datasource
@@ -121,8 +111,8 @@ extension ViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        loadDataIfNeededForRow(indexPath.row)
-
+        pagedArray.loadDataIfNeededForRow(indexPath.row)
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
         configureCell(cell, data: pagedArray[indexPath.row])
         return cell
