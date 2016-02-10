@@ -22,6 +22,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
+public protocol PagedArrayDelegate: class {
+    func fetchPagedData(page: Int, completion: (() -> Void))
+}
+
 ///
 /// A paging collection type for arbitrary elements. Great for implementing paging
 /// mechanisms to scrolling UI elements such as `UICollectionView` and `UITableView`.
@@ -42,6 +47,15 @@ public struct PagedArray<T> {
     
     /// The starting page index
     public let startPageIndex: Int
+    
+    /// The delegate to fetch new data
+    public weak var delegate: PagedArrayDelegate?
+    
+    /// How many rows "in front" should be loaded (private)
+    private var preloadMargin = 10
+    
+    /// Cache for preload data fetching (private)
+    private var dataPreloadingCache = NSCache()
     
     /// When set to true, no size or upper index checking
     /// is done when setting pages, making the paged array
@@ -70,9 +84,11 @@ public struct PagedArray<T> {
     // MARK: Initializers
     
     /// Creates an empty `PagedArray`
-    public init(count: Int, pageSize: Int, startPageIndex: Int = 0) {
+    public init(delegate: PagedArrayDelegate? = nil, count: Int, pageSize: Int, preloadMargin: Int, startPageIndex: Int = 0) {
+        self.delegate = delegate
         self.count = count
         self.pageSize = pageSize
+        self.preloadMargin = preloadMargin
         self.startPageIndex = startPageIndex
     }
     
@@ -133,6 +149,35 @@ public struct PagedArray<T> {
         pages.removeAll(keepCapacity: true)
     }
     
+    
+    // MARK: Private helpers
+    
+    private func needsLoadDataForPage(page: Int) -> Bool {
+        return pages[page] == nil && dataPreloadingCache.objectForKey(page) == nil
+    }
+    
+    public func loadDataIfNeededForRow(row: Int) {
+        
+        let currentPage = pageNumberForIndex(row)
+        if needsLoadDataForPage(currentPage) {
+            loadDataForPage(currentPage)
+        }
+        
+        let preloadIndex = row + preloadMargin
+        if preloadIndex < endIndex {
+            let preloadPage = pageNumberForIndex(preloadIndex)
+            if preloadPage > currentPage && needsLoadDataForPage(preloadPage) {
+                loadDataForPage(preloadPage)
+            }
+        }
+    }
+    
+    private func loadDataForPage(page: Int) {
+        dataPreloadingCache.setObject(page, forKey: page)
+        delegate?.fetchPagedData(page) { () -> Void in
+            self.dataPreloadingCache.removeObjectForKey(page)
+        }
+    }
 }
 
 // MARK: SequenceType
