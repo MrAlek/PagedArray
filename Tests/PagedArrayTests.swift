@@ -55,6 +55,7 @@ class PagedArrayTests: XCTestCase {
 
     
     // MARK: Tests
+    
     func testSizeIsCorrect() {
         XCTAssertEqual(pagedArray.count, ArrayCount, "Paged array has wrong size")
         XCTAssertEqual(Array(pagedArray).count, ArrayCount, "Paged array elements has wrong size")
@@ -68,33 +69,26 @@ class PagedArrayTests: XCTestCase {
     }
     
     func testSubscriptingWorksForAllValidIndexesWithoutHittingAssertions() {
-        for var i = pagedArray.startIndex; i < pagedArray.endIndex; i++ {
+        for i in pagedArray.startIndex..<pagedArray.endIndex {
             pagedArray[i]
         }
     }
     
-    func testSubscriptingOutOfRangeHitsAssertion() {
-        // Currently impossible to test in Swift 1.2
-    }
-    
     func testCanSetLastPageWithUnevenSize() {
-        
         let elements = Array(1...pagedArray.sizeForPage(pagedArray.lastPageIndex))
         
         pagedArray.setElements(elements, pageIndex: pagedArray.lastPageIndex)
     }
     
     func testChangingCountChangesLastPageIndexesRange() {
-        
         let originalIndexes = pagedArray.indexes(pagedArray.lastPageIndex)
-        pagedArray.count++
+        pagedArray.count += 1
         let newIndexes = pagedArray.indexes(pagedArray.lastPageIndex)
         
         XCTAssertNotEqual(originalIndexes, newIndexes, "Indexes for last page did not change even though total count changed")
     }
     
     func testChangingCountChangesLastPageIndex() {
-        
         let originalLastPageIndex = pagedArray.lastPageIndex
         pagedArray.count += PageSize
         

@@ -39,7 +39,7 @@ Array(pagedArray) // ["A", "B", ... nil, nil]
 
 ## Requirements
 
-PagedArray is currently built for Swift 1.2 using Xcode 6.3.
+PagedArray is currently built for Swift 2.2 using Xcode 7.3
 
 ## Installation
 
@@ -78,7 +78,7 @@ $ brew install carthage
 To integrate PagedArray into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "MrAlek/PagedArray" >= 0.2
+github "MrAlek/PagedArray" >= 0.3
 ```
 
 ## Demo
