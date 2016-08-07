@@ -62,10 +62,10 @@ class PagedArrayTests: XCTestCase {
     }
     
     func testGeneratorWorks() {
-        let generatedArray = Array(pagedArray.generate())
+        let generatedArray = Array(pagedArray.makeIterator())
 
         XCTAssertEqual(generatedArray.count, ArrayCount, "Generated array has wrong count")
-        XCTAssertEqual(generatedArray[0]!, firstPage[0], "Generated array has wrong content")
+        XCTAssertEqual(generatedArray[0], firstPage[0], "Generated array has wrong content")
     }
     
     func testSubscriptingWorksForAllValidIndexesWithoutHittingAssertions() {
@@ -198,7 +198,7 @@ class PagedArrayTests: XCTestCase {
 }
 
 private extension PagedArray {
-    func sizeForPage(pageIndex: Int) -> Int {
+    func sizeForPage(_ pageIndex: Int) -> Int {
         let indexes = self.indexes(pageIndex)
         return indexes.endIndex-indexes.startIndex
     }

@@ -79,13 +79,13 @@ public struct PagedArray<T> {
     // MARK: Public functions
     
     /// Returns the page index for an element index
-    public func pageNumberForIndex(index: Index) -> Int {
+    public func pageNumberForIndex(_ index: Index) -> Int {
         assert(index >= startIndex && index < endIndex, "Index out of bounds")
         return index/pageSize+startPageIndex
     }
     
     /// Returns a `Range` corresponding to the indexes for a page
-    public func indexes(pageIndex: Int) -> Range<Index> {
+    public func indexes(_ pageIndex: Int) -> CountableRange<Index> {
         assert(pageIndex >= startPageIndex && pageIndex <= lastPageIndex, "Page index out of bounds")
         
         let startIndex: Index = (pageIndex-startPageIndex)*pageSize
@@ -102,7 +102,7 @@ public struct PagedArray<T> {
     // MARK: Public mutating functions
     
     /// Sets a page of elements for a page index
-    public mutating func setElements(elements: [Element], pageIndex: Int) {
+    public mutating func setElements(_ elements: [Element], pageIndex: Int) {
         assert(pageIndex >= startPageIndex, "Page index out of bounds")
         assert(count == 0 || elements.count > 0, "Can't set empty elements page on non-empty array")
         
@@ -124,38 +124,43 @@ public struct PagedArray<T> {
     }
     
     /// Removes the elements corresponding to the page, replacing them with `nil` values
-    public mutating func removePage(pageNumber: Int) {
+    public mutating func removePage(_ pageNumber: Int) {
         pages[pageNumber] = nil
     }
     
     /// Removes all loaded elements, replacing them with `nil` values
     public mutating func removeAllPages() {
-        pages.removeAll(keepCapacity: true)
+        pages.removeAll(keepingCapacity: true)
     }
     
 }
 
 // MARK: SequenceType
 
-extension PagedArray : SequenceType {
-    public func generate() -> IndexingGenerator<PagedArray> {
-        return IndexingGenerator(self)
+extension PagedArray : Sequence {
+    public func makeIterator() -> IndexingIterator<PagedArray> {
+        return IndexingIterator(_elements: self)
     }
 }
 
 // MARK: CollectionType
 
-extension PagedArray : CollectionType {
+extension PagedArray : Collection {
     public typealias Index = Int
+    public typealias _Element = Element?
     
     public var startIndex: Index { return 0 }
     public var endIndex: Index { return count }
     
-    public subscript (index: Index) -> Element? {
-        let pageNumber = pageNumberForIndex(index)
+    public func index(after i: Int) -> Int {
+        return i+1
+    }
+    
+    public subscript (position: Index) -> Element? {
+        let pageNumber = pageNumberForIndex(position)
         
         if let page = pages[pageNumber] {
-            return page[index%pageSize]
+            return page[position%pageSize]
         } else {
             // Return nil for all pages that haven't been set yet
             return nil
@@ -182,7 +187,7 @@ extension PagedArray : CustomDebugStringConvertible {
 // MARK: Private functions
 
 private extension PagedArray {
-    func sizeForPage(pageIndex: Int) -> Int {
+    func sizeForPage(_ pageIndex: Int) -> Int {
         let indexes = self.indexes(pageIndex)
         return indexes.endIndex-indexes.startIndex
     }
