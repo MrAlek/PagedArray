@@ -145,7 +145,7 @@ extension PagedArray : Sequence {
 
 // MARK: CollectionType
 
-extension PagedArray : Collection {
+extension PagedArray : BidirectionalCollection {
     public typealias Index = Int
     public typealias _Element = Element?
     
@@ -154,6 +154,10 @@ extension PagedArray : Collection {
     
     public func index(after i: Int) -> Int {
         return i+1
+    }
+    
+    public func index(before i: Int) -> Int {
+        return i-1
     }
     
     public subscript (position: Index) -> Element? {
