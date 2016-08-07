@@ -79,13 +79,13 @@ public struct PagedArray<T> {
     // MARK: Public functions
     
     /// Returns the page index for an element index
-    public func pageNumberForIndex(_ index: Index) -> Int {
+    public func pageNumber(forElementIndex index: Index) -> Int {
         assert(index >= startIndex && index < endIndex, "Index out of bounds")
         return index/pageSize+startPageIndex
     }
     
     /// Returns a `Range` corresponding to the indexes for a page
-    public func indexes(_ pageIndex: Int) -> CountableRange<Index> {
+    public func indexes(forPage pageIndex: Int) -> CountableRange<Index> {
         assert(pageIndex >= startPageIndex && pageIndex <= lastPageIndex, "Page index out of bounds")
         
         let startIndex: Index = (pageIndex-startPageIndex)*pageSize
@@ -102,12 +102,12 @@ public struct PagedArray<T> {
     // MARK: Public mutating functions
     
     /// Sets a page of elements for a page index
-    public mutating func setElements(_ elements: [Element], pageIndex: Int) {
+    public mutating func set(elements: [Element], atPageIndex pageIndex: Int) {
         assert(pageIndex >= startPageIndex, "Page index out of bounds")
         assert(count == 0 || elements.count > 0, "Can't set empty elements page on non-empty array")
         
         let pageIndexForExpectedSize = (pageIndex > lastPageIndex) ? lastPageIndex : pageIndex
-        let expectedSize = sizeForPage(pageIndexForExpectedSize)
+        let expectedSize = size(forPage: pageIndexForExpectedSize)
         
         if !updatesCountWhenSettingPages {
             assert(pageIndex <= lastPageIndex, "Page index out of bounds")
@@ -124,7 +124,7 @@ public struct PagedArray<T> {
     }
     
     /// Removes the elements corresponding to the page, replacing them with `nil` values
-    public mutating func removePage(_ pageNumber: Int) {
+    public mutating func remove(page pageNumber: Int) {
         pages[pageNumber] = nil
     }
     
@@ -157,9 +157,9 @@ extension PagedArray : Collection {
     }
     
     public subscript (position: Index) -> Element? {
-        let pageNumber = pageNumberForIndex(position)
+        let pageIndex = pageNumber(forElementIndex: position)
         
-        if let page = pages[pageNumber] {
+        if let page = pages[pageIndex] {
             return page[position%pageSize]
         } else {
             // Return nil for all pages that haven't been set yet
@@ -187,8 +187,8 @@ extension PagedArray : CustomDebugStringConvertible {
 // MARK: Private functions
 
 private extension PagedArray {
-    func sizeForPage(_ pageIndex: Int) -> Int {
-        let indexes = self.indexes(pageIndex)
+    func size(forPage pageIndex: Int) -> Int {
+        let indexes = self.indexes(forPage: pageIndex)
         return indexes.endIndex-indexes.startIndex
     }
 }
