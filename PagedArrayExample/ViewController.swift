@@ -35,63 +35,63 @@ let TotalCount = 200 /// Number of rows in table view
 class ViewController: UITableViewController {
 
     let cellIdentifier = "Cell"
-    let operationQueue = NSOperationQueue()
+    let operationQueue = OperationQueue()
     
     var pagedArray = PagedArray<String>(count: TotalCount, pageSize: PageSize)
-    var dataLoadingOperations = [Int: NSOperation]()
+    var dataLoadingOperations = [Int: Operation]()
     var shouldPreload = true
     
     // MARK: User actions
     
     @IBAction func clearDataPressed() {
-        dataLoadingOperations.removeAll(keepCapacity: true)
+        dataLoadingOperations.removeAll(keepingCapacity: true)
         operationQueue.cancelAllOperations()
         pagedArray.removeAllPages()
         tableView.reloadData()
     }
     
-    @IBAction func preLoadingSwitchChanged(sender: UISwitch) {
-        shouldPreload = sender.on
+    @IBAction func preLoadingSwitchChanged(_ sender: UISwitch) {
+        shouldPreload = sender.isOn
     }
     
     // MARK: Private functions
     
-    private func configureCell(cell: UITableViewCell, data: String?) {
+    private func configureCell(_ cell: UITableViewCell, data: String?) {
         cell.textLabel!.text = data ?? ""
     }
     
-    private func loadDataIfNeededForRow(row: Int) {
+    private func loadDataIfNeededForRow(_ row: Int) {
         
-        let currentPage = pagedArray.pageNumberForIndex(row)
+        let currentPage = pagedArray.page(for: row)
         if needsLoadDataForPage(currentPage) {
             loadDataForPage(currentPage)
         }
         
         let preloadIndex = row+PreloadMargin
         if preloadIndex < pagedArray.endIndex && shouldPreload {
-            let preloadPage = pagedArray.pageNumberForIndex(preloadIndex)
+            let preloadPage = pagedArray.page(for: preloadIndex)
             if preloadPage > currentPage && needsLoadDataForPage(preloadPage) {
                 loadDataForPage(preloadPage)
             }
         }
     }
     
-    private func needsLoadDataForPage(page: Int) -> Bool {
-        return pagedArray.pages[page] == nil && dataLoadingOperations[page] == nil
+    private func needsLoadDataForPage(_ page: Int) -> Bool {
+        return pagedArray.elements[page] == nil && dataLoadingOperations[page] == nil
     }
     
-    private func loadDataForPage(page: Int) {
-        let indexes = pagedArray.indexes(page)
+    private func loadDataForPage(_ page: Int) {
+        let indexes = pagedArray.indexes(for: page)
 
         // Create loading operation
         let operation = DataLoadingOperation(indexesToLoad: indexes) { [unowned self] indexes, data in
             
             // Set elements on paged array
-            self.pagedArray.setElements(data, pageIndex: page)
+            self.pagedArray.set(elements: data, at: page)
             
             // Reload cells
             if let indexPathsToReload = self.visibleIndexPathsForIndexes(indexes) {
-                self.tableView.reloadRowsAtIndexPaths(indexPathsToReload, withRowAnimation: .Automatic)
+                self.tableView.reloadRows(at: indexPathsToReload, with: .automatic)
             }
             
             // Cleanup
@@ -103,8 +103,8 @@ class ViewController: UITableViewController {
         dataLoadingOperations[page] = operation
     }
     
-    private func visibleIndexPathsForIndexes(indexes: Range<Int>) -> [NSIndexPath]? {
-        return tableView.indexPathsForVisibleRows?.filter { indexes.contains($0.row) }
+    private func visibleIndexPathsForIndexes(_ indexes: CountableRange<Int>) -> [IndexPath]? {
+        return tableView.indexPathsForVisibleRows?.filter { indexes.contains(($0 as NSIndexPath).row) }
     }
     
 }
@@ -112,18 +112,18 @@ class ViewController: UITableViewController {
 // MARK: Table view datasource
 extension ViewController {
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pagedArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        loadDataIfNeededForRow(indexPath.row)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        loadDataIfNeededForRow((indexPath as NSIndexPath).row)
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         configureCell(cell, data: pagedArray[indexPath.row])
         return cell
     }
@@ -132,22 +132,22 @@ extension ViewController {
 
 
 /// Test operation that produces nonsense numbers as data
-class DataLoadingOperation: NSBlockOperation {
+class DataLoadingOperation: BlockOperation {
     
-    init(indexesToLoad: Range<Int>, completion: (indexes: Range<Int>, data: [String]) -> Void) {
+    init(indexesToLoad: CountableRange<Int>, completion: (indexes: CountableRange<Int>, data: [String]) -> Void) {
         super.init()
         
         print("Loading indexes: \(indexesToLoad)")
         
         addExecutionBlock {
             // Simulate loading
-            NSThread.sleepForTimeInterval(DataLoadingOperationDuration)
+            Thread.sleep(forTimeInterval: DataLoadingOperationDuration)
         }
         
         completionBlock = {
             let data = indexesToLoad.map { "Content data \($0)" }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 completion(indexes: indexesToLoad, data: data)
             }
         }
