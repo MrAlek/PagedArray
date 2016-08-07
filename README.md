@@ -15,7 +15,7 @@ PagedArray represents a list of optional elements stored by pages. It implements
 var pagedArray = PagedArray<String>(count: 200, pageSize: 20)
 
 // Set data pages
-pagedArray.setElements(["A" ... "T"], pageIndex: 1)
+pagedArray.set(elements: ["A" ... "T"], at: 1)
 
 // Retrieve data like a normal array containing optional elements
 pagedArray.count // 200
