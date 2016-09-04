@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
-               BuildableName = "PagedArray-watchOS.framework"
+               BuildableName = "PagedArray.framework"
                BlueprintName = "PagedArray-watchOS"
                ReferencedContainer = "container:PagedArray.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
-            BuildableName = "PagedArray-watchOS.framework"
+            BuildableName = "PagedArray.framework"
             BlueprintName = "PagedArray-watchOS"
             ReferencedContainer = "container:PagedArray.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
-            BuildableName = "PagedArray-watchOS.framework"
+            BuildableName = "PagedArray.framework"
             BlueprintName = "PagedArray-watchOS"
             ReferencedContainer = "container:PagedArray.xcodeproj">
          </BuildableReference>
