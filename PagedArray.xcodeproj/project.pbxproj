@@ -542,7 +542,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -562,7 +562,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -648,7 +648,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-macOS";
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = macosx;
@@ -670,7 +670,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-macOS";
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = macosx;
@@ -885,6 +885,7 @@
 				930964661D7C3D0800EBA9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		930964801D7C3EC800EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-macOS" */ = {
 			isa = XCConfigurationList;
@@ -893,6 +894,7 @@
 				930964821D7C3EC800EBA9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		930964831D7C3EC800EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-macOSTests" */ = {
 			isa = XCConfigurationList;
@@ -901,6 +903,7 @@
 				930964851D7C3EC800EBA9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93C47CE21AA9E2D2006FF405 /* Build configuration list for PBXProject "PagedArray" */ = {
 			isa = XCConfigurationList;
