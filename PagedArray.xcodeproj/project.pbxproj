@@ -11,6 +11,8 @@
 		930964581D7C3AFC00EBA9BE /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930964401D7C37CD00EBA9BE /* PagedArray.framework */; };
 		930964591D7C3C5400EBA9BE /* PagedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C47CED1AA9E2D2006FF405 /* PagedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9309645A1D7C3C8400EBA9BE /* PagedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47D041AA9E308006FF405 /* PagedArray.swift */; };
+		930964681D7C3D7A00EBA9BE /* PagedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47D041AA9E308006FF405 /* PagedArray.swift */; };
+		930964691D7C3D7E00EBA9BE /* PagedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C47CED1AA9E2D2006FF405 /* PagedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93C47CEE1AA9E2D2006FF405 /* PagedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C47CED1AA9E2D2006FF405 /* PagedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93C47CF41AA9E2D3006FF405 /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C47CE81AA9E2D2006FF405 /* PagedArray.framework */; };
 		93C47CFB1AA9E2D3006FF405 /* PagedArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47CFA1AA9E2D3006FF405 /* PagedArrayTests.swift */; };
@@ -37,10 +39,11 @@
 /* Begin PBXFileReference section */
 		930964401D7C37CD00EBA9BE /* PagedArray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagedArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PagedArray-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		930964601D7C3D0800EBA9BE /* PagedArray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagedArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C47CE81AA9E2D2006FF405 /* PagedArray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagedArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C47CEC1AA9E2D2006FF405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C47CED1AA9E2D2006FF405 /* PagedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PagedArray.h; sourceTree = "<group>"; };
-		93C47CF31AA9E2D3006FF405 /* PagedArrayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PagedArrayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		93C47CF31AA9E2D3006FF405 /* PagedArray-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PagedArray-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C47CF91AA9E2D3006FF405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C47CFA1AA9E2D3006FF405 /* PagedArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedArrayTests.swift; sourceTree = "<group>"; };
 		93C47D041AA9E308006FF405 /* PagedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedArray.swift; sourceTree = "<group>"; };
@@ -59,6 +62,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				930964581D7C3AFC00EBA9BE /* PagedArray.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9309645C1D7C3D0800EBA9BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,9 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				93C47CE81AA9E2D2006FF405 /* PagedArray.framework */,
-				93C47CF31AA9E2D3006FF405 /* PagedArrayTests.xctest */,
+				93C47CF31AA9E2D3006FF405 /* PagedArray-iOSTests.xctest */,
 				930964401D7C37CD00EBA9BE /* PagedArray.framework */,
 				930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */,
+				930964601D7C3D0800EBA9BE /* PagedArray.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +157,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9309645D1D7C3D0800EBA9BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930964691D7C3D7E00EBA9BE /* PagedArray.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE51AA9E2D2006FF405 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,9 +212,27 @@
 			productReference = 930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		93C47CE71AA9E2D2006FF405 /* PagedArray */ = {
+		9309645F1D7C3D0800EBA9BE /* PagedArray-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93C47CFE1AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray" */;
+			buildConfigurationList = 930964671D7C3D0800EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-watchOS" */;
+			buildPhases = (
+				9309645B1D7C3D0800EBA9BE /* Sources */,
+				9309645C1D7C3D0800EBA9BE /* Frameworks */,
+				9309645D1D7C3D0800EBA9BE /* Headers */,
+				9309645E1D7C3D0800EBA9BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PagedArray-watchOS";
+			productName = "PagedArray-watchOS";
+			productReference = 930964601D7C3D0800EBA9BE /* PagedArray.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		93C47CE71AA9E2D2006FF405 /* PagedArray-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93C47CFE1AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray-iOS" */;
 			buildPhases = (
 				93C47CE31AA9E2D2006FF405 /* Sources */,
 				93C47CE41AA9E2D2006FF405 /* Frameworks */,
@@ -206,14 +243,14 @@
 			);
 			dependencies = (
 			);
-			name = PagedArray;
+			name = "PagedArray-iOS";
 			productName = PagedArray;
 			productReference = 93C47CE81AA9E2D2006FF405 /* PagedArray.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		93C47CF21AA9E2D3006FF405 /* PagedArrayTests */ = {
+		93C47CF21AA9E2D3006FF405 /* PagedArray-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93C47D011AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArrayTests" */;
+			buildConfigurationList = 93C47D011AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray-iOSTests" */;
 			buildPhases = (
 				93C47CEF1AA9E2D3006FF405 /* Sources */,
 				93C47CF01AA9E2D3006FF405 /* Frameworks */,
@@ -224,9 +261,9 @@
 			dependencies = (
 				93C47CF61AA9E2D3006FF405 /* PBXTargetDependency */,
 			);
-			name = PagedArrayTests;
+			name = "PagedArray-iOSTests";
 			productName = PagedArrayTests;
-			productReference = 93C47CF31AA9E2D3006FF405 /* PagedArrayTests.xctest */;
+			productReference = 93C47CF31AA9E2D3006FF405 /* PagedArray-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -243,6 +280,9 @@
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					930964481D7C37CD00EBA9BE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					9309645F1D7C3D0800EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					93C47CE71AA9E2D2006FF405 = {
@@ -265,10 +305,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93C47CE71AA9E2D2006FF405 /* PagedArray */,
-				93C47CF21AA9E2D3006FF405 /* PagedArrayTests */,
+				93C47CE71AA9E2D2006FF405 /* PagedArray-iOS */,
+				93C47CF21AA9E2D3006FF405 /* PagedArray-iOSTests */,
 				9309643F1D7C37CD00EBA9BE /* PagedArray-tvOS */,
 				930964481D7C37CD00EBA9BE /* PagedArray-tvOSTests */,
+				9309645F1D7C3D0800EBA9BE /* PagedArray-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -282,6 +323,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		930964471D7C37CD00EBA9BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9309645E1D7C3D0800EBA9BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -321,6 +369,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9309645B1D7C3D0800EBA9BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930964681D7C3D7A00EBA9BE /* PagedArray.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE31AA9E2D2006FF405 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,7 +403,7 @@
 		};
 		93C47CF61AA9E2D3006FF405 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 93C47CE71AA9E2D2006FF405 /* PagedArray */;
+			target = 93C47CE71AA9E2D2006FF405 /* PagedArray-iOS */;
 			targetProxy = 93C47CF51AA9E2D3006FF405 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -416,6 +472,48 @@
 				PRODUCT_NAME = "PagedArray-tvOSTests";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		930964651D7C3D0800EBA9BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-watchOS";
+				PRODUCT_NAME = PagedArray;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		930964661D7C3D0800EBA9BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-watchOS";
+				PRODUCT_NAME = PagedArray;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -521,7 +619,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PagedArray;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -539,7 +637,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PagedArray;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -578,12 +676,22 @@
 				930964521D7C37CD00EBA9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		930964561D7C37CD00EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				930964531D7C37CD00EBA9BE /* Debug */,
 				930964541D7C37CD00EBA9BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		930964671D7C3D0800EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				930964651D7C3D0800EBA9BE /* Debug */,
+				930964661D7C3D0800EBA9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
@@ -596,7 +704,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93C47CFE1AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray" */ = {
+		93C47CFE1AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93C47CFF1AA9E2D3006FF405 /* Debug */,
@@ -605,7 +713,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93C47D011AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArrayTests" */ = {
+		93C47D011AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93C47D021AA9E2D3006FF405 /* Debug */,
