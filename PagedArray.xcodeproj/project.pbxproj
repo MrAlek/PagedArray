@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930964571D7C38E400EBA9BE /* PagedArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47CFA1AA9E2D3006FF405 /* PagedArrayTests.swift */; };
+		930964581D7C3AFC00EBA9BE /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930964401D7C37CD00EBA9BE /* PagedArray.framework */; };
+		930964591D7C3C5400EBA9BE /* PagedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C47CED1AA9E2D2006FF405 /* PagedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9309645A1D7C3C8400EBA9BE /* PagedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47D041AA9E308006FF405 /* PagedArray.swift */; };
 		93C47CEE1AA9E2D2006FF405 /* PagedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C47CED1AA9E2D2006FF405 /* PagedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93C47CF41AA9E2D3006FF405 /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C47CE81AA9E2D2006FF405 /* PagedArray.framework */; };
 		93C47CFB1AA9E2D3006FF405 /* PagedArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C47CFA1AA9E2D3006FF405 /* PagedArrayTests.swift */; };
@@ -14,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9309644B1D7C37CD00EBA9BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93C47CDF1AA9E2D2006FF405 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9309643F1D7C37CD00EBA9BE;
+			remoteInfo = "PagedArray-tvOS";
+		};
 		93C47CF51AA9E2D3006FF405 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93C47CDF1AA9E2D2006FF405 /* Project object */;
@@ -24,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		930964401D7C37CD00EBA9BE /* PagedArray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagedArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PagedArray-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C47CE81AA9E2D2006FF405 /* PagedArray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagedArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C47CEC1AA9E2D2006FF405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C47CED1AA9E2D2006FF405 /* PagedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PagedArray.h; sourceTree = "<group>"; };
@@ -34,6 +47,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9309643C1D7C37CD00EBA9BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		930964461D7C37CD00EBA9BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930964581D7C3AFC00EBA9BE /* PagedArray.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE41AA9E2D2006FF405 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,6 +94,8 @@
 			children = (
 				93C47CE81AA9E2D2006FF405 /* PagedArray.framework */,
 				93C47CF31AA9E2D3006FF405 /* PagedArrayTests.xctest */,
+				930964401D7C37CD00EBA9BE /* PagedArray.framework */,
+				930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +138,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		9309643D1D7C37CD00EBA9BE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930964591D7C3C5400EBA9BE /* PagedArray.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE51AA9E2D2006FF405 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -119,6 +157,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9309643F1D7C37CD00EBA9BE /* PagedArray-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 930964551D7C37CD00EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-tvOS" */;
+			buildPhases = (
+				9309643B1D7C37CD00EBA9BE /* Sources */,
+				9309643C1D7C37CD00EBA9BE /* Frameworks */,
+				9309643D1D7C37CD00EBA9BE /* Headers */,
+				9309643E1D7C37CD00EBA9BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PagedArray-tvOS";
+			productName = "PagedArray-tvOS";
+			productReference = 930964401D7C37CD00EBA9BE /* PagedArray.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		930964481D7C37CD00EBA9BE /* PagedArray-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 930964561D7C37CD00EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-tvOSTests" */;
+			buildPhases = (
+				930964451D7C37CD00EBA9BE /* Sources */,
+				930964461D7C37CD00EBA9BE /* Frameworks */,
+				930964471D7C37CD00EBA9BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9309644C1D7C37CD00EBA9BE /* PBXTargetDependency */,
+			);
+			name = "PagedArray-tvOSTests";
+			productName = "PagedArray-tvOSTests";
+			productReference = 930964491D7C37CD00EBA9BE /* PagedArray-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		93C47CE71AA9E2D2006FF405 /* PagedArray */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93C47CFE1AA9E2D3006FF405 /* Build configuration list for PBXNativeTarget "PagedArray" */;
@@ -161,10 +235,16 @@
 		93C47CDF1AA9E2D2006FF405 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Apps and Wonders";
 				TargetAttributes = {
+					9309643F1D7C37CD00EBA9BE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					930964481D7C37CD00EBA9BE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					93C47CE71AA9E2D2006FF405 = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -187,11 +267,27 @@
 			targets = (
 				93C47CE71AA9E2D2006FF405 /* PagedArray */,
 				93C47CF21AA9E2D3006FF405 /* PagedArrayTests */,
+				9309643F1D7C37CD00EBA9BE /* PagedArray-tvOS */,
+				930964481D7C37CD00EBA9BE /* PagedArray-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9309643E1D7C37CD00EBA9BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		930964471D7C37CD00EBA9BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE61AA9E2D2006FF405 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +305,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9309643B1D7C37CD00EBA9BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9309645A1D7C3C8400EBA9BE /* PagedArray.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		930964451D7C37CD00EBA9BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				930964571D7C38E400EBA9BE /* PagedArrayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93C47CE31AA9E2D2006FF405 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +340,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9309644C1D7C37CD00EBA9BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9309643F1D7C37CD00EBA9BE /* PagedArray-tvOS */;
+			targetProxy = 9309644B1D7C37CD00EBA9BE /* PBXContainerItemProxy */;
+		};
 		93C47CF61AA9E2D3006FF405 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 93C47CE71AA9E2D2006FF405 /* PagedArray */;
@@ -236,6 +353,72 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		930964511D7C37CD00EBA9BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOS";
+				PRODUCT_NAME = PagedArray;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		930964521D7C37CD00EBA9BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOS";
+				PRODUCT_NAME = PagedArray;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		930964531D7C37CD00EBA9BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOSTests";
+				PRODUCT_NAME = "PagedArray-tvOSTests";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		930964541D7C37CD00EBA9BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOSTests";
+				PRODUCT_NAME = "PagedArray-tvOSTests";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
 		93C47CFC1AA9E2D3006FF405 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -388,6 +571,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		930964551D7C37CD00EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				930964511D7C37CD00EBA9BE /* Debug */,
+				930964521D7C37CD00EBA9BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		930964561D7C37CD00EBA9BE /* Build configuration list for PBXNativeTarget "PagedArray-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				930964531D7C37CD00EBA9BE /* Debug */,
+				930964541D7C37CD00EBA9BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		93C47CE21AA9E2D2006FF405 /* Build configuration list for PBXProject "PagedArray" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
