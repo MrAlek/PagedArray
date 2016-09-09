@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C47CE71AA9E2D2006FF405"
+               BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
                BuildableName = "PagedArray.framework"
-               BlueprintName = "PagedArray"
-               ReferencedContainer = "container:PagedArray.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C47CF21AA9E2D3006FF405"
-               BuildableName = "PagedArrayTests.xctest"
-               BlueprintName = "PagedArrayTests"
+               BlueprintName = "PagedArray-watchOS"
                ReferencedContainer = "container:PagedArray.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C47CF21AA9E2D3006FF405"
-               BuildableName = "PagedArrayTests.xctest"
-               BlueprintName = "PagedArrayTests"
-               ReferencedContainer = "container:PagedArray.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C47CE71AA9E2D2006FF405"
-            BuildableName = "PagedArray.framework"
-            BlueprintName = "PagedArray"
-            ReferencedContainer = "container:PagedArray.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -78,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C47CE71AA9E2D2006FF405"
+            BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
             BuildableName = "PagedArray.framework"
-            BlueprintName = "PagedArray"
+            BlueprintName = "PagedArray-watchOS"
             ReferencedContainer = "container:PagedArray.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C47CE71AA9E2D2006FF405"
+            BlueprintIdentifier = "9309645F1D7C3D0800EBA9BE"
             BuildableName = "PagedArray.framework"
-            BlueprintName = "PagedArray"
+            BlueprintName = "PagedArray-watchOS"
             ReferencedContainer = "container:PagedArray.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
