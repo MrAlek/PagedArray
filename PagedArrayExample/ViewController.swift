@@ -56,11 +56,11 @@ class ViewController: UITableViewController {
     
     // MARK: Private functions
     
-    private func configureCell(_ cell: UITableViewCell, data: String?) {
+    fileprivate func configureCell(_ cell: UITableViewCell, data: String?) {
         cell.textLabel!.text = data ?? ""
     }
     
-    private func loadDataIfNeededForRow(_ row: Int) {
+    fileprivate func loadDataIfNeededForRow(_ row: Int) {
         
         let currentPage = pagedArray.page(for: row)
         if needsLoadDataForPage(currentPage) {
@@ -87,7 +87,7 @@ class ViewController: UITableViewController {
         let operation = DataLoadingOperation(indexesToLoad: indexes) { [unowned self] indexes, data in
             
             // Set elements on paged array
-            self.pagedArray.set(elements: data, at: page)
+            self.pagedArray.set(data, forPage: page)
             
             // Reload cells
             if let indexPathsToReload = self.visibleIndexPathsForIndexes(indexes) {
@@ -134,7 +134,7 @@ extension ViewController {
 /// Test operation that produces nonsense numbers as data
 class DataLoadingOperation: BlockOperation {
     
-    init(indexesToLoad: CountableRange<Int>, completion: (indexes: CountableRange<Int>, data: [String]) -> Void) {
+    init(indexesToLoad: CountableRange<Int>, completion: @escaping (CountableRange<Int>, [String]) -> Void) {
         super.init()
         
         print("Loading indexes: \(indexesToLoad)")
@@ -148,7 +148,7 @@ class DataLoadingOperation: BlockOperation {
             let data = indexesToLoad.map { "Content data \($0)" }
             
             OperationQueue.main.addOperation {
-                completion(indexes: indexesToLoad, data: data)
+                completion(indexesToLoad, data)
             }
         }
     }
