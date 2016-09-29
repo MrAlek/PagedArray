@@ -31,7 +31,7 @@ public struct PagedArray<T> {
     public typealias PageIndex = Int
     
     /// The datastorage
-    public private(set) var elements = [PageIndex: [Element]]()
+    public fileprivate(set) var elements = [PageIndex: [Element]]()
     
     // MARK: Public properties
     
@@ -103,7 +103,7 @@ public struct PagedArray<T> {
     // MARK: Public mutating functions
     
     /// Sets a page of elements for a page index
-    public mutating func set(elements: [Element], at page: PageIndex) {
+    public mutating func set(_ elements: [Element], forPage page: PageIndex) {
         assert(page >= startPage, "Page index out of bounds")
         assert(count == 0 || elements.count > 0, "Can't set empty elements page on non-empty array")
         
@@ -125,7 +125,7 @@ public struct PagedArray<T> {
     }
     
     /// Removes the elements corresponding to the page, replacing them with `nil` values
-    public mutating func remove(page: PageIndex) {
+    public mutating func remove(_ page: PageIndex) {
         elements[page] = nil
     }
     
