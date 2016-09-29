@@ -13,10 +13,13 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/MrAlek/PagedArray.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MisterAlek'
 
-  s.platform     = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.9'
+  s.watchos.deployment_target = '2.0'
+  s.tvos.deployment_target = '9.0'
   s.requires_arc = true
 
-  s.source_files = 'Source/*'
+  s.source_files = 'Source/*.swift'
   s.frameworks = 'Foundation'
 
 end
