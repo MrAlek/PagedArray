@@ -70,8 +70,13 @@ class PagedArrayTests: XCTestCase {
     
     func testSubscriptingWorksForAllValidIndexesWithoutHittingAssertions() {
         for i in pagedArray.startIndex..<pagedArray.endIndex {
-            pagedArray[i]
+            let _ = pagedArray[i]
         }
+    }
+    
+    func testCanReplaceValuesUsingSubscript() {
+        pagedArray[0] = 666
+        XCTAssertEqual(pagedArray[0], 666)
     }
     
     func testCanSetLastPageWithUnevenSize() {

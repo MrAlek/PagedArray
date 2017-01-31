@@ -161,14 +161,25 @@ extension PagedArray : BidirectionalCollection {
         return i-1
     }
     
+    /// Accesses and sets elements for a given flat index position.
+    /// Currently, setter can only be used to replace non-optional values.
     public subscript (position: Index) -> Element? {
-        let pageIndex = page(for: position)
+        get {
+            let pageIndex = page(for: position)
+            
+            if let page = elements[pageIndex] {
+                return page[position%pageSize]
+            } else {
+                // Return nil for all pages that haven't been set yet
+                return nil
+            }
+        }
         
-        if let page = elements[pageIndex] {
-            return page[position%pageSize]
-        } else {
-            // Return nil for all pages that haven't been set yet
-            return nil
+        set(newValue) {
+            guard let newValue = newValue else { return }
+            
+            let pageIndex = page(for: position)
+            elements[pageIndex]?[position % pageSize] = newValue
         }
     }
 }
