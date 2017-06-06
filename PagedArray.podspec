@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PagedArray"
-  s.version          = "0.6"
+  s.version          = "0.7"
   s.summary          = "A Swift data structure for easier pagination"
   s.description      = <<-DESC
                        PagedArray is a generic Swift data structure for helping
