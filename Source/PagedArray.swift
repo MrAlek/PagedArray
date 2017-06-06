@@ -27,11 +27,10 @@
 /// mechanisms to scrolling UI elements such as `UICollectionView` and `UITableView`.
 ///
 public struct PagedArray<T> {
-    public typealias Element = T
     public typealias PageIndex = Int
     
     /// The datastorage
-    public fileprivate(set) var elements = [PageIndex: [Element]]()
+    public fileprivate(set) var elements = [PageIndex: [T]]()
     
     // MARK: Public properties
     
@@ -64,8 +63,8 @@ public struct PagedArray<T> {
     }
     
     /// All elements currently set, in order
-    public var loadedElements: [Element] {
-        return self.filter{ $0 != nil }.map{ $0! }
+    public var loadedElements: [T] {
+        return self.flatMap { $0 }
     }
     
     // MARK: Initializers
@@ -103,7 +102,7 @@ public struct PagedArray<T> {
     // MARK: Public mutating functions
     
     /// Sets a page of elements for a page index
-    public mutating func set(_ elements: [Element], forPage page: PageIndex) {
+    public mutating func set(_ elements: [T], forPage page: PageIndex) {
         assert(page >= startPage, "Page index out of bounds")
         assert(count == 0 || elements.count > 0, "Can't set empty elements page on non-empty array")
         
@@ -148,7 +147,6 @@ extension PagedArray : Sequence {
 
 extension PagedArray : BidirectionalCollection {
     public typealias Index = Int
-    public typealias _Element = Element?
     
     public var startIndex: Index { return 0 }
     public var endIndex: Index { return count }
@@ -163,7 +161,7 @@ extension PagedArray : BidirectionalCollection {
     
     /// Accesses and sets elements for a given flat index position.
     /// Currently, setter can only be used to replace non-optional values.
-    public subscript (position: Index) -> Element? {
+    public subscript (position: Index) -> T? {
         get {
             let pageIndex = page(for: position)
             
@@ -179,7 +177,9 @@ extension PagedArray : BidirectionalCollection {
             guard let newValue = newValue else { return }
             
             let pageIndex = page(for: position)
-            elements[pageIndex]?[position % pageSize] = newValue
+            var elementPage = elements[pageIndex]
+            elementPage?[position % pageSize] = newValue
+            elements[pageIndex] = elementPage
         }
     }
 }
