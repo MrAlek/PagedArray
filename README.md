@@ -39,7 +39,7 @@ Array(pagedArray) // ["A", "B", ... nil, nil]
 
 ## Requirements
 
-PagedArray is currently built for Swift 3.0 using Xcode 8
+PagedArray is currently built for Swift 3.2 using Xcode 8 or 9
 
 ## Installation
 
@@ -55,7 +55,7 @@ To integrate PagedArray into your Xcode project using CocoaPods, specify it in y
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
-pod 'PagedArray', '~> 0.5'
+pod 'PagedArray'
 ```
 
 Then, run the following command:
@@ -78,7 +78,7 @@ $ brew install carthage
 To integrate PagedArray into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "MrAlek/PagedArray" >= 0.5
+github "MrAlek/PagedArray"
 ```
 
 ## Demo
