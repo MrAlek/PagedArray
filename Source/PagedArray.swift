@@ -64,7 +64,7 @@ public struct PagedArray<T> {
     
     /// All elements currently set, in order
     public var loadedElements: [T] {
-        return self.flatMap { $0 }
+        return self.compactMap { $0 }
     }
     
     // MARK: Initializers
