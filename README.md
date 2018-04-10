@@ -37,10 +37,6 @@ Array(pagedArray) // ["A", "B", ... nil, nil]
 
 ![UITableView example](FluentPagination.gif)
 
-## Requirements
-
-PagedArray is currently built for Swift 3.2 using Xcode 8 or 9
-
 ## Installation
 
 **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
