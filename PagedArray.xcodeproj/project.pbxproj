@@ -352,32 +352,32 @@
 				TargetAttributes = {
 					9309643F1D7C37CD00EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 					};
 					930964481D7C37CD00EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 					};
 					9309645F1D7C3D0800EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 					};
 					9309646E1D7C3EC800EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 						ProvisioningStyle = Automatic;
 					};
 					930964771D7C3EC800EBA9BE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 					};
 					93C47CE71AA9E2D2006FF405 = {
 						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1110;
 					};
 					93C47CF21AA9E2D3006FF405 = {
 						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -550,6 +550,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -571,6 +572,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -585,6 +587,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOSTests";
 				PRODUCT_NAME = "PagedArray-tvOSTests";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
@@ -598,6 +602,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-tvOSTests";
 				PRODUCT_NAME = "PagedArray-tvOSTests";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;
@@ -619,6 +625,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -641,6 +648,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -665,6 +673,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -687,6 +696,7 @@
 				PRODUCT_NAME = PagedArray;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -702,6 +712,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -717,6 +728,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.PagedArray-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -854,6 +866,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PagedArray;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -872,6 +885,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PagedArray;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -887,6 +901,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -898,6 +913,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appsandwonders.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
