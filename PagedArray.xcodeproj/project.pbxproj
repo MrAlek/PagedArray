@@ -121,7 +121,7 @@
 		93C47CDE1AA9E2D2006FF405 = {
 			isa = PBXGroup;
 			children = (
-				93C47CEA1AA9E2D2006FF405 /* Source */,
+				93C47CEA1AA9E2D2006FF405 /* Sources */,
 				93C47CF71AA9E2D3006FF405 /* Tests */,
 				93C47CE91AA9E2D2006FF405 /* Products */,
 			);
@@ -141,14 +141,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		93C47CEA1AA9E2D2006FF405 /* Source */ = {
+		93C47CEA1AA9E2D2006FF405 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				93C47CED1AA9E2D2006FF405 /* PagedArray.h */,
 				93C47D041AA9E308006FF405 /* PagedArray.swift */,
 				93C47CEB1AA9E2D2006FF405 /* Supporting Files */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		93C47CEB1AA9E2D2006FF405 /* Supporting Files */ = {

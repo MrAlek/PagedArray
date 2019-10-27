@@ -43,6 +43,16 @@ Array(pagedArray) // ["A", "B", ... nil, nil]
 
 To use PagedArray with a project targeting iOS 7, you must include the `PagedArray.swift` source file directly in your project.
 
+### Swift Package Manager
+
+To integrate PagedArray into your project using SwiftPM add the following to your Package.swift:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/MrAlek/PagedArray", from: "0.9"),
+],
+```
+
 ### Cocoapods
 
 To integrate PagedArray into your Xcode project using CocoaPods, specify it in your `Podfile`:
